@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LoginSample</title>
+  <%= stylesheet_link_tag :all %>
+
+  <%= csrf_meta_tag %>
+</head>
+<body>
+<% flash.each do |key,value| %>
+<p><% value %></p>
+<% end %>
+<%= yield %>
+
+</body>
+</html>
