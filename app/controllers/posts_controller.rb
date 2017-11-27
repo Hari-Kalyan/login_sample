@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @posts = Post.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def new
@@ -12,25 +12,32 @@ class PostsController < ApplicationController
   end
 
   def create
-    @posts = Post.new(params[:post])
+    @post = Post.new(params[:post])
 
-    if @posts.save
-      redirect_to posts_path, :notice => "Your post is saved"
-    else
+    if @post.save
+      redirect_to posts_path, :notice => "Your post has been saved"
+     else
       render "new"
     end
   end
 
   def edit
-    @posts = Post.find(params[:id])
+    @post = Post.find(params[:id])
 
   end
 
   def update
-
+     @post = Post.find(params[:id])
+        if @post.update_attributes(params[:post])
+          redirect_to posts_path, :notice => "Post updated"
+         else
+          render "edit"
+        end
   end
 
   def destroy
-
+       @post = Post.find(params[:id])
+       @post.destroy
+          redirect_to posts_path, :notice => "your post has been deleted"
   end
 end
